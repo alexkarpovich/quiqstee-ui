@@ -4,8 +4,19 @@
 
 export const environment = {
   name: 'dev',
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:8888/api',
+  whitelistedDomains: [
+      'localhost:8888'
+  ],
+  blacklistedRoutes: [
+    'localhost:8888/api/account/signup',
+    'localhost:8888/api/account/login'
+  ]
 };
+
+export const TOKEN_KEY = 'token';
+export const CURRENT_USER_KEY = 'currentUser';
 
 /*
  * For easier debugging in development mode, you can import the following file
