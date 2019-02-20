@@ -4,5 +4,8 @@ export class User {
     phone: string;
     firstName: string;
     lastName: string;
-    token?: string;
+    role: string;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string;
 }
