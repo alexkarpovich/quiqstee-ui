@@ -5,13 +5,13 @@
 export const environment = {
   name: 'dev',
   production: false,
-  apiUrl: 'http://localhost:8888/api',
+  apiUrl: 'http://localhost:8888',
   whitelistedDomains: [
       'localhost:8888'
   ],
   blacklistedRoutes: [
-    'localhost:8888/api/account/signup',
-    'localhost:8888/api/account/login'
+    'localhost:8888/signup',
+    'localhost:8888/login'
   ]
 };
 
