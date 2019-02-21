@@ -50,6 +50,25 @@ export class AuthenticationService {
             }));
     }
 
+    signup(email: string, password: string) {
+        return this.http.post<any>(`${environment.apiUrl}/signup`, { email, password })
+            .pipe(map(res => {
+                console.log(res)
+                // login successful if there's a jwt token in the response
+                if (res.data && res.data.token) {
+                    const decodedToken = this.jwt.decodeToken(res.data.token);
+                    console.log(decodedToken)
+                    const currentUser = {...decodedToken, id: decodedToken.uid};
+
+                    localStorage.setItem(TOKEN_KEY, res.data.token);
+                    localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUser));
+                    this.currentUserSubject.next(currentUser);
+                }
+
+                return res;
+            }));
+    }
+
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem(CURRENT_USER_KEY);
