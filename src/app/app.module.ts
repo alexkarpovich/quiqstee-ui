@@ -7,7 +7,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment, TOKEN_KEY } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 
