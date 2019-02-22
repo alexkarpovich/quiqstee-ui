@@ -25,9 +25,6 @@ export class SignupComponent implements OnInit {
     ngOnInit() {
         this.signupForm = this.formBuilder.group({
             email: ['', Validators.required],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            password: ['', Validators.required],
         });
 
         this.authenticationService.logout();
@@ -44,15 +41,12 @@ export class SignupComponent implements OnInit {
             return;
         }
 
-        console.log(this.f.value)
-        return
-
         this.loading = true;
-        this.authenticationService.signup(this.f.email.value, this.f.password.value)
+        this.authenticationService.signup(this.f.email.value)
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigate([this.returnUrl]);
+                    this.router.navigate(['/']);
                 },
                 error => {
                     this.error = error;

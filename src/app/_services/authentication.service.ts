@@ -50,23 +50,17 @@ export class AuthenticationService {
             }));
     }
 
-    signup(email: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/signup`, { email, password })
+    signup(email: string) {
+        return this.http.post<any>(`${environment.apiUrl}/signup`, { email })
             .pipe(map(res => {
-                console.log(res)
-                // login successful if there's a jwt token in the response
-                if (res.data && res.data.token) {
-                    const decodedToken = this.jwt.decodeToken(res.data.token);
-                    console.log(decodedToken)
-                    const currentUser = {...decodedToken, id: decodedToken.uid};
-
-                    localStorage.setItem(TOKEN_KEY, res.data.token);
-                    localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUser));
-                    this.currentUserSubject.next(currentUser);
-                }
+                console.log(res);
 
                 return res;
             }));
+    }
+
+    confirmSignup(token: string, data: any) {
+        return this.http.post<any>(`${environment.apiUrl}/signup/${token}`, data);
     }
 
     logout() {
