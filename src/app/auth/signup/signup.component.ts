@@ -13,7 +13,6 @@ export class SignupComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
-    error = '';
 
     constructor(
         private formBuilder: FormBuilder,
@@ -49,8 +48,11 @@ export class SignupComponent implements OnInit {
                     this.router.navigate(['/']);
                 },
                 error => {
-                    this.error = error;
                     this.loading = false;
+
+                    Object.keys(error.errors).forEach(key => {
+                        this.f[key].setErrors({backend: error.errors[key]});
+                    })
                 });
     }
 }
